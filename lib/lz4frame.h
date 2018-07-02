@@ -65,14 +65,24 @@ extern "C" {
  *  LZ4FLIB_API :
  *  Control library symbols visibility.
  */
-#if defined(LZ4_DLL_EXPORT) && (LZ4_DLL_EXPORT==1)
-#  define LZ4FLIB_API __declspec(dllexport)
-#elif defined(LZ4_DLL_IMPORT) && (LZ4_DLL_IMPORT==1)
-#  define LZ4FLIB_API __declspec(dllimport)
-#elif defined(__GNUC__) && (__GNUC__ >= 4)
-#  define LZ4FLIB_API __attribute__ ((__visibility__ ("default")))
+#ifndef LZ4FLIB_VISIBILITY
+#  if defined(__GNUC__) && (__GNUC__ >= 4)
+#    define LZ4FLIB_VISIBILITY __attribute__ ((visibility ("default")))
+#  else
+#    define LZ4FLIB_VISIBILITY
+#  endif
+#endif
+
+#if (defined WIN32 || defined _WIN32)
+#  if defined(LZ4_DLL_EXPORT) && (LZ4_DLL_EXPORT==1)
+#    define LZ4FLIB_API __declspec(dllexport) LZ4FLIB_VISIBILITY
+#  elif defined(LZ4_DLL_IMPORT) && (LZ4_DLL_IMPORT==1)
+#    define LZ4FLIB_API __declspec(dllimport) LZ4FLIB_VISIBILITY
+#  else
+#    define LZ4FLIB_API LZ4FLIB_VISIBILITY
+#  endif
 #else
-#  define LZ4FLIB_API
+#  define LZ4FLIB_API LZ4FLIB_VISIBILITY
 #endif
 
 #ifdef LZ4F_DISABLE_DEPRECATE_WARNINGS
