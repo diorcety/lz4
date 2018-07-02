@@ -123,14 +123,14 @@ else()
 endif()
 
 # lz4
-add_executable(lz4cli ${LZ4_CLI_SOURCES})
-set_target_properties(lz4cli PROPERTIES OUTPUT_NAME lz4)
-target_link_libraries(lz4cli ${LZ4_LINK_LIBRARY})
+#add_executable(lz4cli ${LZ4_CLI_SOURCES})
+#set_target_properties(lz4cli PROPERTIES OUTPUT_NAME lz4)
+#target_link_libraries(lz4cli ${LZ4_LINK_LIBRARY})
 
 # lz4c
-add_executable(lz4c ${LZ4_CLI_SOURCES})
-set_target_properties(lz4c PROPERTIES COMPILE_DEFINITIONS "ENABLE_LZ4C_LEGACY_OPTIONS")
-target_link_libraries(lz4c ${LZ4_LINK_LIBRARY})
+#add_executable(lz4c ${LZ4_CLI_SOURCES})
+#set_target_properties(lz4c PROPERTIES COMPILE_DEFINITIONS "ENABLE_LZ4C_LEGACY_OPTIONS")
+#target_link_libraries(lz4c ${LZ4_LINK_LIBRARY})
 
 # Extra warning flags
 include (CheckCCompilerFlag)
@@ -166,8 +166,8 @@ endforeach (flag)
 if(NOT LZ4_BUNDLED_MODE)
   include(GNUInstallDirs)
 
-  install(TARGETS lz4cli lz4c
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+  #install(TARGETS lz4cli lz4c
+  #  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
   install(TARGETS ${LZ4_LIBRARIES_BUILT}
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
