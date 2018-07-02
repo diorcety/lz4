@@ -100,6 +100,7 @@ option(LZ4_POSITION_INDEPENDENT_LIB "Use position independent code for static li
 set(LZ4_LIBRARIES_BUILT)
 if(BUILD_SHARED_LIBS)
   add_library(lz4_shared SHARED ${LZ4_SOURCES})
+  target_compile_definitions(lz4_shared PUBLIC "LZ4_DLL_EXPORT=1")
   set_target_properties(lz4_shared PROPERTIES
     OUTPUT_NAME lz4
     SOVERSION "${LZ4_VERSION_MAJOR}"
